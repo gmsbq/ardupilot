@@ -306,6 +306,11 @@ public:
     virtual bool get_velocity_NED(Vector3f &vec) const WARN_IF_UNUSED {
         return false;
     }
+    
+    // return a ground acceleration in meters/second/second, North/East/Down
+    virtual bool get_acceleration_NED(Vector3f &vec) const WARN_IF_UNUSED {
+        return false;
+    }
 
     // returns the expected NED magnetic field
     virtual bool get_expected_mag_field_NED(Vector3f &ret) const WARN_IF_UNUSED {

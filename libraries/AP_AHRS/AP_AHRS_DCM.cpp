@@ -1136,3 +1136,13 @@ bool AP_AHRS_DCM::get_velocity_NED(Vector3f &vec) const
     return true;
 }
 
+/*
+  return NED acceleration if we have GPS lock
+ */
+bool AP_AHRS_DCM::get_acceleration_NED(Vector3f &vec) const
+{
+    AP_InertialSensor &_ins = AP::ins();
+    // TODO : NOT NED
+    vec = _ins.get_accel();
+    return true;
+}

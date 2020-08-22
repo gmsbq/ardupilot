@@ -154,6 +154,7 @@ public:
     bool have_inertial_nav() const override;
 
     bool get_velocity_NED(Vector3f &vec) const override;
+    bool get_acceleration_NED(Vector3f &vec) const override;
 
     // return the relative position NED to either home or origin
     // return true if the estimate is valid

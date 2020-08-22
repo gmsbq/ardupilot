@@ -32,6 +32,7 @@ singleton AP_AHRS method get_hagl boolean float'Null
 singleton AP_AHRS method wind_estimate Vector3f
 singleton AP_AHRS method groundspeed_vector Vector2f
 singleton AP_AHRS method get_velocity_NED boolean Vector3f'Null
+singleton AP_AHRS method get_acceleration_NED boolean Vector3f'Null
 singleton AP_AHRS method get_relative_position_NED_home boolean Vector3f'Null
 singleton AP_AHRS method home_is_set boolean
 singleton AP_AHRS method prearm_healthy boolean

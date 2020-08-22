@@ -115,6 +115,7 @@ public:
     bool healthy() const override;
 
     bool get_velocity_NED(Vector3f &vec) const override;
+    bool get_acceleration_NED(Vector3f &vec) const override;
 
 private:
     float _ki;

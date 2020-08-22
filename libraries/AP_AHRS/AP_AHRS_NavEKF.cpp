@@ -810,6 +810,39 @@ bool AP_AHRS_NavEKF::get_velocity_NED(Vector3f &vec) const
     return AP_AHRS_DCM::get_velocity_NED(vec);
 }
 
+// return the specific force, North/East/Down
+bool AP_AHRS_NavEKF::get_acceleration_NED(Vector3f &vec) const
+{
+    switch (active_EKF_type()) {
+    case EKFType::NONE:
+        break;
+
+#if HAL_NAVEKF2_AVAILABLE
+    case EKFType::TWO:
+        EKF2.getAccelNED(vec);
+        return true;
+#endif
+
+#if HAL_NAVEKF3_AVAILABLE
+    case EKFType::THREE:
+        EKF3.getAccelNED(vec);
+        return true;
+#endif
+
+#if CONFIG_HAL_BOARD == HAL_BOARD_SITL
+    case EKFType::SITL:
+        if (!_sitl) {
+            return false;
+        }
+        const struct SITL::sitl_fdm &fdm = _sitl->state;
+        // TODO : NOT NED
+        vec = Vector3f(fdm.xAccel, fdm.yAccel, fdm.zAccel);
+        return true;
+#endif
+    }
+    return AP_AHRS_DCM::get_acceleration_NED(vec);
+}
+
 // returns the expected NED magnetic field
 bool AP_AHRS_NavEKF::get_mag_field_NED(Vector3f &vec) const
 {
