@@ -355,6 +355,25 @@ void SITL::Log_Write_SIMSTATE()
         q4      : state.quaternion.q4,
     };
     AP::logger().WriteBlock(&pkt, sizeof(pkt));
+    
+    struct log_VEL pkt_vel = {
+        LOG_PACKET_HEADER_INIT(LOG_SIMSTATE_VEL_MSG),
+        time_us : AP_HAL::micros64(),
+        veln    : (float)state.speedN,
+        vele    : (float)state.speedE,
+        veld    : (float)state.speedD,
+    };
+    AP::logger().WriteBlock(&pkt_vel, sizeof(pkt_vel));
+    
+    struct log_ACC pkt_acc = {
+        LOG_PACKET_HEADER_INIT(LOG_SIMSTATE_ACC_MSG),
+        time_us : AP_HAL::micros64(),
+        // TODO : Not NED!
+        accn    : (float)state.xAccel,
+        acce    : (float)state.yAccel,
+        accd    : (float)state.zAccel,
+    };
+    AP::logger().WriteBlock(&pkt_acc, sizeof(pkt_acc));
 }
 
 /*

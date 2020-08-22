@@ -2516,6 +2516,10 @@ struct PACKED log_Winch {
       "ACC","Qfff","TimeUS,AccN,AccE,AccD", "sooo", "F000" }, \
     { LOG_SIMSTATE_MSG, sizeof(log_AHRS), \
       "SIM","QccCfLLffff","TimeUS,Roll,Pitch,Yaw,Alt,Lat,Lng,Q1,Q2,Q3,Q4", "sddhmDU????", "FBBB0GG????" }, \
+    { LOG_SIMSTATE_VEL_MSG, sizeof(log_VEL), \
+      "SVEL","Qfff","TimeUS,VelN,VelE,VelD", "snnn", "F000" }, \
+    { LOG_SIMSTATE_ACC_MSG, sizeof(log_ACC), \
+      "SACC","Qfff","TimeUS,AccN,AccE,AccD", "sooo", "F000" }, \
     { LOG_NKF1_MSG, sizeof(log_EKF1), \
       "NKF1","QBccCfffffffccce","TimeUS,C,Roll,Pitch,Yaw,VN,VE,VD,dPD,PN,PE,PD,GX,GY,GZ,OH", "s#ddhnnnnmmmkkkm", "F-BBB0000000BBBB" }, \
     { LOG_NKF2_MSG, sizeof(log_NKF2), \
@@ -2746,6 +2750,8 @@ enum LogMessages : uint8_t {
     LOG_POS_MSG,
     LOG_VEL_MSG,
     LOG_ACC_MSG,
+    LOG_SIMSTATE_VEL_MSG,
+    LOG_SIMSTATE_ACC_MSG,
     LOG_PIDR_MSG,
     LOG_PIDP_MSG,
     LOG_PIDY_MSG,
