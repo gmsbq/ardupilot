@@ -537,6 +537,42 @@ void AP_Logger::Write_POS()
     WriteBlock(&pkt, sizeof(pkt));
 }
 
+void AP_Logger::Write_VEL()
+{
+    const AP_AHRS &ahrs = AP::ahrs();
+
+    Vector3f vel;
+    if (!ahrs.get_velocity_NED(vel)) {
+        return;
+    }
+    const struct log_VEL pkt{
+        LOG_PACKET_HEADER_INIT(LOG_VEL_MSG),
+        time_us         : AP_HAL::micros64(),
+        veln            : vel.x,
+        vele            : vel.y,
+        veld            : vel.z,
+    };
+    WriteBlock(&pkt, sizeof(pkt));
+}
+
+void AP_Logger::Write_ACC()
+{
+    const AP_AHRS &ahrs = AP::ahrs();
+
+    Vector3f acc;
+    if (!ahrs.get_acceleration_NED(acc)) {
+        return;
+    }
+    const struct log_ACC pkt{
+        LOG_PACKET_HEADER_INIT(LOG_ACC_MSG),
+        time_us         : AP_HAL::micros64(),
+        accn            : acc.x,
+        acce            : acc.y,
+        accd            : acc.z,
+    };
+    WriteBlock(&pkt, sizeof(pkt));
+}
+
 void AP_Logger::Write_Radio(const mavlink_radio_t &packet)
 {
     const struct log_Radio pkt{

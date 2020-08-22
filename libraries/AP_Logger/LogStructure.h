@@ -386,6 +386,18 @@ struct PACKED log_POS {
     float rel_origin_alt;
 };
 
+struct PACKED log_VEL {
+    LOG_PACKET_HEADER;
+    uint64_t time_us;
+    float veln, vele, veld;
+};
+
+struct PACKED log_ACC {
+    LOG_PACKET_HEADER;
+    uint64_t time_us;
+    float accn, acce, accd;
+};
+
 struct PACKED log_POWR {
     LOG_PACKET_HEADER;
     uint64_t time_us;
@@ -2498,6 +2510,10 @@ struct PACKED log_Winch {
       "AHR2","QccCfLLffff","TimeUS,Roll,Pitch,Yaw,Alt,Lat,Lng,Q1,Q2,Q3,Q4","sddhmDU????", "FBBB0GG????" }, \
     { LOG_POS_MSG, sizeof(log_POS), \
       "POS","QLLfff","TimeUS,Lat,Lng,Alt,RelHomeAlt,RelOriginAlt", "sDUmmm", "FGG000" }, \
+    { LOG_VEL_MSG, sizeof(log_VEL), \
+      "VEL","Qfff","TimeUS,VelN,VelE,VelD", "snnn", "F000" }, \
+    { LOG_ACC_MSG, sizeof(log_ACC), \
+      "ACC","Qfff","TimeUS,AccN,AccE,AccD", "sooo", "F000" }, \
     { LOG_SIMSTATE_MSG, sizeof(log_AHRS), \
       "SIM","QccCfLLffff","TimeUS,Roll,Pitch,Yaw,Alt,Lat,Lng,Q1,Q2,Q3,Q4", "sddhmDU????", "FBBB0GG????" }, \
     { LOG_NKF1_MSG, sizeof(log_EKF1), \
@@ -2728,6 +2744,8 @@ enum LogMessages : uint8_t {
     LOG_GYR2_MSG,
     LOG_GYR3_MSG,
     LOG_POS_MSG,
+    LOG_VEL_MSG,
+    LOG_ACC_MSG,
     LOG_PIDR_MSG,
     LOG_PIDP_MSG,
     LOG_PIDY_MSG,

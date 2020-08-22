@@ -50,6 +50,8 @@ void Plane::Log_Write_Attitude(void)
     sitl.Log_Write_SIMSTATE();
 #endif
     logger.Write_POS();
+    logger.Write_VEL();
+    logger.Write_ACC();
 }
 
 // do fast logging for plane

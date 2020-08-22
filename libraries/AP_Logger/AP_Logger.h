@@ -250,6 +250,8 @@ public:
     void Write_Power(void);
     void Write_AHRS2();
     void Write_POS();
+    void Write_VEL();
+    void Write_ACC();
     void Write_Radio(const mavlink_radio_t &packet);
     void Write_Message(const char *message);
     void Write_MessageF(const char *fmt, ...);
